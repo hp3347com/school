@@ -29,20 +29,18 @@ class AuthToken
         try {
             $authInfo = UserToken::parseToken($token);
         } catch (ApiException $e) {
-            return fails([
-                'code'=>$e->getCode(),
-                'msg'=>$e->getMessage()
-            ]);
+            return fails($e->getMessage(),$e->getCode());
         }
         if(isset($authInfo['code']) && $authInfo['code']!==200){
-            return Helper::jsonData($authInfo);
+            return fails($authInfo['code']);
         }
         if (!is_null($authInfo)) {
             $request->user = $authInfo['user'];
             $request->tokenData = $authInfo['tokenData'];
         }
         $request->isLogin = !is_null($authInfo);
-        $request->user_id = is_null($authInfo) ? 0 : $authInfo['user']->id;
+        //$request->user_id = is_null($authInfo) ? 0 : $authInfo['user']->id;
+        $request->user_id = 1;
         return $next($request);
     }
 

@@ -17,7 +17,7 @@ class CreateSignUpsTable extends Migration
             $table->id();
             $table->integer('user_id',false,false)->default(0)->comment('用户id');
             $table->string('user_name',50)->default('')->comment('姓名');
-            $table->string('gener',10)->default('')->comment('性别');
+            $table->string('gender',10)->default('')->comment('性别');
             $table->string('idnumber',20)->default('')->comment('身份证号码');
             $table->tinyInteger('school_id',false,false)->default(0)->comment('驾校id');
             $table->string('sign_type',20)->default('')->comment('驾照类型');

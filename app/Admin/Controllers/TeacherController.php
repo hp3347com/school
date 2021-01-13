@@ -44,9 +44,10 @@ class TeacherController extends AdminController
                 return $htm;
             }
         });
+        $grid->column('status',__('Status'))->switch();
         $grid->column('sort', __('Sort'));
         $grid->column('school.school_name',__('School'));
-        $grid->column('password', __('Password'));
+        $grid->column('password', __('Password'))->hide();
         $grid->column('created_at', __('Created at'))->hide();
         $grid->column('updated_at', __('Updated at'))->hide();
         return $grid;
@@ -107,9 +108,14 @@ class TeacherController extends AdminController
             $option['一']="一对一";
             return $option;
         });
-        $form->switch('sort', __('Sort'));
-        $form->password('password', __('Password'));
-
+        $form->switch('status',__('Status'));
+        $form->number('sort', __('Sort'));
+        $form->hidden('password',__('Password'));
+        if($form->isCreating()){
+            $form->saving(function($form){
+                $form->password = md5($form->password);
+            });
+        }
         return $form;
     }
 }

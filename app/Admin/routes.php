@@ -32,6 +32,12 @@ Route::group([
 
     $router->resource('sign-ups', SignUpController::class);//报名
 
+    $router->resource('partners', PartnerController::class);//合伙人
+
+    $router->resource('exams', ExamController::class);//考试记录
+
+    $router->resource('yu-yues', YuYueController::class);//预约记录
+
 
 
     $router->get('test','SystemConfigController@test'); //测试

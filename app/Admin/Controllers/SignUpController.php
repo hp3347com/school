@@ -29,9 +29,9 @@ class SignUpController extends AdminController
         $grid->column('id', __('Id'));
         $grid->column('user_id', __('User id'));
         $grid->column('user_name', __('User name'));
-        $grid->column('gener', __('Gener'));
+        $grid->column('gender', __('Gender'));
         $grid->column('idnumber', __('Idnumber'));
-        $grid->column('school_id', __('School id'));
+        $grid->column('school.school_name', __('School name'));
         $grid->column('sign_type', __('Sign type'));
         $grid->column('status', __('Status'));
         $grid->column('sign_time', __('Sign time'));

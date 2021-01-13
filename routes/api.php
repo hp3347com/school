@@ -41,7 +41,14 @@ $api->version( 'v1',[
     $api->get('flow',"IndexController@flow");//学车流程
     $api->get("getSchool","IndexController@getSchoolList");//报名选择驾校
 
-    $api->post("sign_up","IndexController@sign_up");//报名 需要登录
+    $api->post("sign_up","SignUpController@sign_up");//报名 需要登录
+    $api->post('askfor',"PartnerController@askfor");//申请合伙人
+
+    $api->post('upload',"UploadController@upload");//上传
+
+    $api->get("getSignUp","SignUpController@getSignUp");//获取报名结果
+    $api->get("yuyue_teacher","YuYueController@yuyue_teachers");//可预约教练
+    $api->post("yuyue","YuYueController@yuyue");//预约
 
 
 });

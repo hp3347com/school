@@ -10,10 +10,13 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SignUpRequest;
 use App\Models\Banner;
 use App\Models\Nav;
 use App\Models\School;
 use App\Models\Setting;
+use App\Models\SignUp;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -72,17 +75,10 @@ class IndexController extends Controller
     {
         return success(School::getList());
     }
-    /**
-     * 驾校报名
-     * @param Request $request
-     */
-    public function sign_up(Request $request)
+
+
+    public function test()
     {
-        $user_name = $request->input('user_name');
-        $phone = $request->input('phone');
-        $gener = $request->input('gener');
-        $idnumber = $request->input('idnumber');
-        $school_id = $request->input('school_id');
-        $sign_type = $request->input('sign_type');
+
     }
 }
