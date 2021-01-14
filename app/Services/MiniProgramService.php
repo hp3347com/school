@@ -9,6 +9,8 @@
 namespace App\Services;
 use App\Models\Setting;
 use EasyWeChat\Foundation\Application;
+use EasyWeChat\MiniProgram\MiniProgram;
+use JetBrains\PhpStorm\Pure;
 
 
 /**
@@ -27,8 +29,15 @@ class MiniProgramService
     {
         $config = [];
         $wechat = Setting::getMore(['site_url', 'routine_appId', 'routine_appsecret']);
+        $config['mini_program'] = [
+            'app_id' => isset($wechat['routine_appId']) ? trim($wechat['routine_appId']) : '',
+            'secret' => isset($wechat['routine_appsecret']) ? trim($wechat['routine_appsecret']) : ''
+        ];
         return $config;
     }
+
+
+
 
     /**
      * 获取userInfo
@@ -45,10 +54,11 @@ class MiniProgramService
      * @param bool $cache
      * @return null
      */
-    public static function application($cache=false)
+   public static function application($cache=false)
     {
-        (self::$instance ==null || $cache==true) && (self::$instance == new Application(self::options()));
-        return self::$instance;
+//        (self::$instance ==null || $cache==true) && (self::$instance == new Application(self::options()));
+//        return self::$instance;
+        return new MiniProgram();
     }
 
     /**
@@ -57,5 +67,17 @@ class MiniProgramService
     public static function miniProgram()
     {
         return self::application()->mini_program;
+    }
+
+    /**
+     * 加密数据解密
+     * @param $sessionKey
+     * @param $iv
+     * @param $encryptData
+     * @return $userInfo
+     */
+    public static function encryptor($sessionKey, $iv, $encryptData)
+    {
+        return self::miniprogram()->encryptor->decryptData($sessionKey, $iv, $encryptData);
     }
 }

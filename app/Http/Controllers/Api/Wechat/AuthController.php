@@ -33,9 +33,10 @@ class AuthController extends Controller
         $cache_key = $request->input('cache_key');
         $session_key = Cache::get('api_code_' . $cache_key);
         if(!$code && !$session_key){
-            return Util::fail('授权失败,参数有误');
+            return fails('授权失败,参数有误');
         }
         if($code && !$session_key){
+
             $userInfoCong = MiniProgramService::getUserInfo($code);
             $session_key = $userInfoCong['session_key'];
             $cache_key = md5(time() . $code);
